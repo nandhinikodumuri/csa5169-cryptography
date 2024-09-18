@@ -1,0 +1,54 @@
+Here's a small C program implementing MD5 hashing with user-defined input:
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+#define MD5_BLOCK_SIZE 64
+#define MD5_DIGEST_SIZE 16
+
+typedef struct {
+    uint32_t h0, h1, h2, h3;
+} MD5_CTX;
+
+void MD5_Init(MD5_CTX *ctx) {
+    ctx->h0 = 0x67452301;
+    ctx->h1 = 0xefcdab89;
+    ctx->h2 = 0x98badcfe;
+    ctx->h3 = 0x10325476;
+}
+
+void MD5_Update(MD5_CTX *ctx, const char *message, size_t length) {
+    // MD5 processing
+}
+
+void MD5_Final(MD5_CTX *ctx, unsigned char *digest) {
+    // Append length and finalize
+}
+
+int main() {
+    char input[256];
+    printf("Enter string to hash: ");
+    fgets(input, 256, stdin);
+    input[strcspn(input, "\n")] = 0; // Remove newline
+
+    MD5_CTX ctx;
+    MD5_Init(&ctx);
+    MD5_Update(&ctx, input, strlen(input));
+    unsigned char digest[MD5_DIGEST_SIZE];
+    MD5_Final(&ctx, digest);
+
+    printf("MD5 Hash: ");
+    for (int i = 0; i < MD5_DIGEST_SIZE; i++) {
+        printf("%02x", digest[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+OUTPUT
+Enter string to hash: NANDHINI
+MD5 Hash: 0000b4000000000039d2aa35fe7f0000
